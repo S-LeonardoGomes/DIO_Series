@@ -41,7 +41,7 @@ namespace DIO.Series
           default:
             throw new ArgumentOutOfRangeException();
         }
-
+  
         opcaoUsuario = ObterOpcaoUsuario();
       }
 
@@ -61,7 +61,8 @@ namespace DIO.Series
 
       foreach(var serie in lista)
       {
-        Console.WriteLine($"#ID {serie.retornaId()}: - {serie.retornaTitulo()}");
+        var excluido = serie.retornaExcluido();
+        Console.WriteLine($"#ID {serie.retornaId()}: - {serie.retornaTitulo()} {(excluido ? "*Excluido*" : "")}");
       }
     }
 
@@ -97,6 +98,7 @@ namespace DIO.Series
 
     private static void AtualizarSerie()
     {
+      Console.Write("Digite o id da série: ");
       int indiceSerie = int.Parse(Console.ReadLine());
 
       foreach(int i in Enum.GetValues(typeof(Genero)))
