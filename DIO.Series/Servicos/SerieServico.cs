@@ -125,17 +125,17 @@ namespace DIO.Series.Servicos
             ExibirMensagemEncerramento();
         }
 
-        public static void VisualizarSerie()
+        public static void VisualizarSerie(int indiceSerie)
         {
-            ExibirMensagemAviso("Visualizar uma série:");
-
-            Console.Write($"{Environment.NewLine}Digite o id da série: ");
-            int indiceSerie = int.Parse(Console.ReadLine());
-            Console.WriteLine();
-
             Serie serie = repositorio.RetornaPorId(indiceSerie);
-            Console.WriteLine(serie);
+            if(serie == null)
+            {
+                ExibirMensagemAviso("Série não encontrada.");
+                ExibirMensagemEncerramento();
+                return;
+            }
 
+            Console.WriteLine(serie);
             ExibirMensagemEncerramento();
         }
 

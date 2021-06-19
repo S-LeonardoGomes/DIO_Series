@@ -31,7 +31,13 @@ namespace DIO.Series
                         break;
 
                     case "5":
-                        SerieServico.VisualizarSerie();
+                        SerieServico.ExibirMensagemAviso("Visualizar uma série:");
+
+                        Console.Write($"{Environment.NewLine}Digite o id da série: ");
+                        int indiceSerie = int.Parse(Console.ReadLine());
+                        Console.WriteLine();
+
+                        SerieServico.VisualizarSerie(indiceSerie);
                         break;
 
                     case "C":
