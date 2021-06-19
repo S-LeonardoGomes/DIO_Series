@@ -4,70 +4,69 @@ using DIO.Series.Servicos;
 
 namespace DIO.Series
 {
-  class Program
-  {
-    
-    static void Main(string[] args)
+    class Program
     {
-      string opcaoUsuario = ObterOpcaoUsuario();
-
-      while(opcaoUsuario != "X")
-      {
-        switch(opcaoUsuario)
+        static void Main(string[] args)
         {
-          case "1":
-            ListarSeries();
-            break;
+            string opcaoUsuario = ObterOpcaoUsuario();
 
-          case "2":
-            InserirSerie();
-            break;
+            while (opcaoUsuario != "X")
+            {
+                switch (opcaoUsuario)
+                {
+                    case "1":
+                        SerieServico.ListarSeries();
+                        break;
 
-          case "3":
-            AtualizarSerie();
-            break;
-          
-          case "4":
-            ExcluirSerie();
-            break;
-          
-          case "5":
-            VisualizarSerie();
-            break;
-          
-          case "C":
-            Console.Clear();
-            break;
-          
-          default:
-            throw new ArgumentOutOfRangeException();
+                    case "2":
+                        SerieServico.InserirSerie();
+                        break;
+
+                    case "3":
+                        SerieServico.AtualizarSerie();
+                        break;
+
+                    case "4":
+                        SerieServico.ExcluirSerie();
+                        break;
+
+                    case "5":
+                        SerieServico.VisualizarSerie();
+                        break;
+
+                    case "C":
+                        Console.Clear();
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
+                opcaoUsuario = ObterOpcaoUsuario();
+            }
+
+            Console.WriteLine("Obrigado por utilizar nossos serviços.");
+            Console.ReadLine();
         }
-  
-        opcaoUsuario = ObterOpcaoUsuario();
-      }
 
-      Console.WriteLine("Obrigado por utilizar nossos serviços.");
-      Console.ReadLine();
+        private static string ObterOpcaoUsuario()
+        {
+            Console.WriteLine();
+            Console.WriteLine("DIO Séries a seu dispor!!");
+            Console.WriteLine("Informe a opção desejada:");
+
+            Console.WriteLine("1 - Listar séries");
+            Console.WriteLine("2 - Inserir nova série");
+            Console.WriteLine("3 - Atualizar série");
+            Console.WriteLine("4 - Excluir série");
+            Console.WriteLine("5 - Visualizar série");
+            Console.WriteLine("C - Limpar tela");
+            Console.WriteLine("X - Sair");
+            Console.WriteLine();
+
+            string opcaoUsuario = Console.ReadLine().ToUpper();
+            Console.WriteLine();
+            return opcaoUsuario;
+        }
     }
-
-    private static string ObterOpcaoUsuario()
-    {
-      Console.WriteLine();
-      Console.WriteLine("DIO Séries a seu dispor!!");
-      Console.WriteLine("Informe a opção desejada:");
-
-      Console.WriteLine("1 - Listar séries");
-      Console.WriteLine("2 - Inserir nova série");
-      Console.WriteLine("3 - Atualizar série");
-      Console.WriteLine("4 - Excluir série");
-      Console.WriteLine("5 - Visualizar série");
-      Console.WriteLine("C - Limpar tela");
-      Console.WriteLine("X - Sair");
-      Console.WriteLine();
-
-      string opcaoUsuario = Console.ReadLine().ToUpper();
-      Console.WriteLine();
-      return opcaoUsuario;
-    }
-  }
 }
