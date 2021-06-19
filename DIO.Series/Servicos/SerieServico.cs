@@ -28,10 +28,34 @@ namespace DIO.Series.Servicos
                 ExibirMensagemAviso("Série não encontrada.");
                 return;
             }
+            Console.Write("Deseja realmente excluir este registro(S/N)? ");
+            char resposta = Convert.ToChar(Console.ReadLine().ToUpper());
 
-            repositorio.Exclui(indiceSerie);
-            Console.WriteLine();
-            ExibirMensagemAviso("Série excluída com sucesso.");
+            if (resposta == 'N')
+            {
+                Console.WriteLine();
+                ExibirMensagemAviso("Operação abortada.");
+                return;
+            }
+            else if (resposta == 'S')
+            {
+                if (SerieExcluida(indiceSerie))
+                {
+                    Console.WriteLine();
+                    ExibirMensagemAviso("Esta série já havia sido removida.");
+                    return;
+                }
+
+                repositorio.Exclui(indiceSerie);
+                Console.WriteLine();
+                ExibirMensagemAviso("Série excluída com sucesso.");
+            }
+            else
+            {
+                Console.WriteLine();
+                ExibirMensagemAviso("Opção inválida.");
+                return;
+            }
         }
 
         public static void InserirSerie(int genero, string titulo, int ano, string descricao)
@@ -98,6 +122,16 @@ namespace DIO.Series.Servicos
         public static bool ExisteSerie(int indiceBusca)
         {
             return repositorio.RetornaPorId(indiceBusca) != null ? true : false;
+        }
+
+        public static bool SerieExcluida(int indiceSerie)
+        {
+            Serie serie = repositorio.RetornaPorId(indiceSerie);
+            if (serie.retornaExcluido())
+            {
+                return true;
+            }
+                return false;
         }
     }
 }
