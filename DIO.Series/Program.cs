@@ -46,7 +46,7 @@ namespace DIO.Series
             }
 
             Console.WriteLine("Obrigado por utilizar nossos serviços.");
-            Console.ReadLine();
+            Console.ReadKey();
         }
 
         private static string ObterOpcaoUsuario()

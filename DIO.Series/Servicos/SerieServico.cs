@@ -13,9 +13,8 @@ namespace DIO.Series.Servicos
 
         public static void AtualizarSerie()
         {
-            Console.WriteLine("--------------------------------------------");
-            Console.WriteLine("\tAtualizar série.");
-            Console.WriteLine($"--------------------------------------------{Environment.NewLine}");
+            ExibirMensagemAviso("Atualizar série:");
+            Console.WriteLine();
 
             Console.Write("Digite o id da série: ");
             int indiceSerie = int.Parse(Console.ReadLine());
@@ -46,38 +45,30 @@ namespace DIO.Series.Servicos
 
             repositorio.Atualiza(indiceSerie, atualizaSerie);
 
-            Console.WriteLine($"{Environment.NewLine}--------------------------------------------");
-            Console.WriteLine("\tSérie atualizada com sucesso");
-            Console.WriteLine($"--------------------------------------------{Environment.NewLine}");
-            Console.Write("Pressione qualquer tecla para retornar ao menu inicial...");
-            Console.ReadKey();
-            Console.Clear();
+            Console.WriteLine();
+            ExibirMensagemAviso("Série atualizada com sucesso.");
+            ExibirMensagemEncerramento();
         }
-
+        
         public static void ExcluirSerie()
         {
-            Console.WriteLine("--------------------------------------------");
-            Console.WriteLine("\tExcluir uma série:");
-            Console.WriteLine($"--------------------------------------------{Environment.NewLine}");
+            ExibirMensagemAviso("Excluir uma série:");
+            Console.WriteLine();
 
             Console.Write("Digite o id da série: ");
             int indiceSerie = int.Parse(Console.ReadLine());
 
             repositorio.Exclui(indiceSerie);
 
-            Console.WriteLine($"{Environment.NewLine}--------------------------------------------");
-            Console.WriteLine("\tSérie excluída com sucesso");
-            Console.WriteLine($"--------------------------------------------{Environment.NewLine}");
-            Console.Write("Pressione qualquer tecla para retornar ao menu inicial...");
-            Console.ReadKey();
-            Console.Clear();
+            Console.WriteLine();
+            ExibirMensagemAviso("Série excluída com sucesso.");
+            ExibirMensagemEncerramento();
         }
 
         public static void InserirSerie()
         {
-            Console.WriteLine("--------------------------------------------");
-            Console.WriteLine("\tInserir nova série:");
-            Console.WriteLine($"--------------------------------------------{Environment.NewLine}");
+            ExibirMensagemAviso("Inserir nova série:");
+            Console.WriteLine();
 
             foreach (int i in Enum.GetValues(typeof(Genero)))
             {
@@ -105,12 +96,9 @@ namespace DIO.Series.Servicos
 
             repositorio.Insere(novaSerie);
 
-            Console.WriteLine($"{Environment.NewLine}--------------------------------------------");
-            Console.WriteLine("\tSérie adicionada com sucesso");
-            Console.WriteLine($"--------------------------------------------{Environment.NewLine}");
-            Console.Write("Pressione qualquer tecla para retornar ao menu inicial...");
-            Console.ReadKey();
-            Console.Clear();
+            Console.WriteLine();
+            ExibirMensagemAviso("Série adicionada com sucesso.");
+            ExibirMensagemEncerramento();
         }
 
         public static void ListarSeries()
@@ -120,15 +108,12 @@ namespace DIO.Series.Servicos
             if (lista.Count == 0)
             {
                 Console.Clear();
-                Console.WriteLine("--------------------------------------------");
-                Console.WriteLine("\tNenhuma série cadastrada.");
-                Console.WriteLine("--------------------------------------------");
+                ExibirMensagemAviso("Nenhuma série cadastrada.");
                 return;
             }
 
-            Console.WriteLine("--------------------------------------------");
-            Console.WriteLine("\tLista de séries.");
-            Console.WriteLine($"--------------------------------------------{Environment.NewLine}");
+            ExibirMensagemAviso("Lista de séries:");
+            Console.WriteLine();
 
             foreach (Serie serie in lista)
             {
@@ -136,24 +121,33 @@ namespace DIO.Series.Servicos
                 Console.WriteLine($"#ID {serie.retornaId()}: - {serie.retornaTitulo()} {(excluido ? "*Excluido*" : "")}");
             }
 
-            Console.WriteLine($"{Environment.NewLine}********************************************{Environment.NewLine}");
-            Console.Write("Pressione qualquer tecla para retornar ao menu inicial...");
-            Console.ReadKey();
-            Console.Clear();
+            Console.WriteLine($"{Environment.NewLine}********************************************");
+            ExibirMensagemEncerramento();
         }
 
         public static void VisualizarSerie()
         {
-            Console.WriteLine("--------------------------------------------");
-            Console.WriteLine("\tVisualizar uma série.");
-            Console.WriteLine($"--------------------------------------------{Environment.NewLine}");
+            ExibirMensagemAviso("Visualizar uma série:");
 
-            Console.Write("Digite o id da série: ");
+            Console.Write($"{Environment.NewLine}Digite o id da série: ");
             int indiceSerie = int.Parse(Console.ReadLine());
             Console.WriteLine();
 
             Serie serie = repositorio.RetornaPorId(indiceSerie);
             Console.WriteLine(serie);
+
+            ExibirMensagemEncerramento();
+        }
+
+        public static void ExibirMensagemAviso(string mensagem)
+        {
+            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine($"\t{mensagem}");
+            Console.WriteLine("--------------------------------------------");
+        }
+
+        public static void ExibirMensagemEncerramento()
+        {
             Console.Write($"{Environment.NewLine}Pressione qualquer tecla para retornar ao menu inicial...");
             Console.ReadKey();
             Console.Clear();
