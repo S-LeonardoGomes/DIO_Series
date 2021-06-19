@@ -48,17 +48,24 @@ namespace DIO.Series
                         break;
 
                     case "4":
-                        SerieServico.ExcluirSerie();
+                        SerieServico.ExibirMensagemAviso("Excluir uma série:");
+                        Console.WriteLine();
+
+                        Console.Write("Digite o id da série: ");
+                        int indiceExcluir = int.Parse(Console.ReadLine());
+
+                        SerieServico.ExcluirSerie(indiceExcluir);
+                        SerieServico.ExibirMensagemEncerramento();
                         break;
 
                     case "5":
                         SerieServico.ExibirMensagemAviso("Visualizar uma série:");
 
                         Console.Write($"{Environment.NewLine}Digite o id da série: ");
-                        int indiceSerie = int.Parse(Console.ReadLine());
+                        int indiceVisualizar = int.Parse(Console.ReadLine());
                         Console.WriteLine();
 
-                        SerieServico.VisualizarSerie(indiceSerie);
+                        SerieServico.VisualizarSerie(indiceVisualizar);
                         SerieServico.ExibirMensagemEncerramento();
                         break;
 

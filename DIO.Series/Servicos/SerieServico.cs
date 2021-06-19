@@ -50,19 +50,18 @@ namespace DIO.Series.Servicos
             ExibirMensagemEncerramento();
         }
         
-        public static void ExcluirSerie()
+        public static void ExcluirSerie(int indiceSerie)
         {
-            ExibirMensagemAviso("Excluir uma série:");
-            Console.WriteLine();
-
-            Console.Write("Digite o id da série: ");
-            int indiceSerie = int.Parse(Console.ReadLine());
+            if(repositorio.RetornaPorId(indiceSerie) == null)
+            {
+                Console.WriteLine();
+                ExibirMensagemAviso("Série não encontrada.");
+                return;
+            }
 
             repositorio.Exclui(indiceSerie);
-
             Console.WriteLine();
             ExibirMensagemAviso("Série excluída com sucesso.");
-            ExibirMensagemEncerramento();
         }
 
         public static void InserirSerie(int genero, string titulo, int ano, string descricao)
