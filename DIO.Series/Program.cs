@@ -14,13 +14,16 @@ namespace DIO.Series
             {
                 switch (opcaoUsuario)
                 {
+                    #region ListarSeries
                     case "1":
                         SerieServico.ExibirMensagemAviso("Lista de séries:");
                         Console.WriteLine();
                         SerieServico.ListarSeries();
                         SerieServico.ExibirMensagemEncerramento();
                         break;
+                    #endregion
 
+                    #region InserirSerie
                     case "2":
                         SerieServico.ExibirMensagemAviso("Inserir nova série:");
                         Console.WriteLine();
@@ -45,11 +48,47 @@ namespace DIO.Series
                         SerieServico.ExibirMensagemAviso("Série adicionada com sucesso.");
                         SerieServico.ExibirMensagemEncerramento();
                         break;
+                    #endregion
 
+                    #region AtualizarSerie
                     case "3":
-                        SerieServico.AtualizarSerie();
-                        break;
+                        SerieServico.ExibirMensagemAviso("Atualizar série:");
+                        Console.WriteLine();
 
+                        Console.Write("Digite o id da série: ");
+                        int indiceAtualizar = int.Parse(Console.ReadLine());
+                        Console.WriteLine();
+
+                        if (!SerieServico.ExisteSerie(indiceAtualizar))
+                        {
+                            SerieServico.ExibirMensagemAviso("Série não encontrada.");
+                            SerieServico.ExibirMensagemEncerramento();
+                            break;
+                        }
+
+                        SerieServico.VisualizarSerie(indiceAtualizar);
+                        Console.WriteLine();
+
+                        SerieServico.ExibirGeneros();
+
+                        Console.Write("Digite o gênero entre as opções acima: ");
+                        int genero = int.Parse(Console.ReadLine());
+
+                        Console.Write("Digite o Título da Série: ");
+                        string titulo = Console.ReadLine();
+
+                        Console.Write("Digite o Ano de Início da Série: ");
+                        int ano = int.Parse(Console.ReadLine());
+
+                        Console.Write("Digite a Descrição de Série: ");
+                        string descricao = Console.ReadLine();
+
+                        SerieServico.AtualizarSerie(indiceAtualizar, genero, titulo, descricao, ano);
+                        SerieServico.ExibirMensagemEncerramento();
+                        break;
+                    #endregion
+
+                    #region ExcluirSerie
                     case "4":
                         SerieServico.ExibirMensagemAviso("Excluir uma série:");
                         Console.WriteLine();
@@ -60,7 +99,9 @@ namespace DIO.Series
                         SerieServico.ExcluirSerie(indiceExcluir);
                         SerieServico.ExibirMensagemEncerramento();
                         break;
+                    #endregion
 
+                    #region VisualizarSerie
                     case "5":
                         SerieServico.ExibirMensagemAviso("Visualizar uma série:");
 
@@ -71,13 +112,18 @@ namespace DIO.Series
                         SerieServico.VisualizarSerie(indiceVisualizar);
                         SerieServico.ExibirMensagemEncerramento();
                         break;
+                    #endregion
 
+                    #region Clear
                     case "C":
                         Console.Clear();
                         break;
+                    #endregion
 
+                    #region Default
                     default:
                         throw new ArgumentOutOfRangeException();
+                    #endregion
                 }
 
                 opcaoUsuario = ObterOpcaoUsuario();

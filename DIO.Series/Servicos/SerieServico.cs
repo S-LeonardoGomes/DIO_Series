@@ -11,43 +11,13 @@ namespace DIO.Series.Servicos
     {
         public static SerieRepositorio repositorio = new SerieRepositorio();
 
-        public static void AtualizarSerie()
+        public static void AtualizarSerie(int indiceSerie, int genero, string titulo, string descricao, int ano)
         {
-            ExibirMensagemAviso("Atualizar série:");
-            Console.WriteLine();
-
-            Console.Write("Digite o id da série: ");
-            int indiceSerie = int.Parse(Console.ReadLine());
-            Console.WriteLine();
-
-            foreach (int i in Enum.GetValues(typeof(Genero)))
-            {
-                Console.WriteLine($"{i} - {Enum.GetName(typeof(Genero), i)}");
-            }
-
-            Console.Write("Digite o gênero entre as opções acima: ");
-            int entradaGenero = int.Parse(Console.ReadLine());
-
-            Console.Write("Digite o Título da Série: ");
-            string entradaTitulo = Console.ReadLine();
-
-            Console.Write("Digite o Ano de Início da Série: ");
-            int entradaAno = int.Parse(Console.ReadLine());
-
-            Console.Write("Digite a Descrição de Série: ");
-            string entradaDescricao = Console.ReadLine();
-
-            Serie atualizaSerie = new Serie(id: indiceSerie,
-                                        genero: (Genero)entradaGenero,
-                                        titulo: entradaTitulo,
-                                        ano: entradaAno,
-                                        descricao: entradaDescricao);
+            Serie atualizaSerie = new Serie(indiceSerie, (Genero) genero, titulo, descricao, ano);
 
             repositorio.Atualiza(indiceSerie, atualizaSerie);
-
             Console.WriteLine();
             ExibirMensagemAviso("Série atualizada com sucesso.");
-            ExibirMensagemEncerramento();
         }
         
         public static void ExcluirSerie(int indiceSerie)
@@ -97,7 +67,6 @@ namespace DIO.Series.Servicos
             if(serie == null)
             {
                 ExibirMensagemAviso("Série não encontrada.");
-                ExibirMensagemEncerramento();
                 return;
             }
 
@@ -124,6 +93,11 @@ namespace DIO.Series.Servicos
             {
                 Console.WriteLine($"{i} - {Enum.GetName(typeof(Genero), i)}");
             }
+        }
+
+        public static bool ExisteSerie(int indiceBusca)
+        {
+            return repositorio.RetornaPorId(indiceBusca) != null ? true : false;
         }
     }
 }
