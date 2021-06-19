@@ -19,7 +19,28 @@ namespace DIO.Series
                         break;
 
                     case "2":
-                        SerieServico.InserirSerie();
+                        SerieServico.ExibirMensagemAviso("Inserir nova série:");
+                        Console.WriteLine();
+
+                        SerieServico.ExibirGeneros();
+
+                        Console.WriteLine();
+                        Console.Write("Digite o gênero entre as opções acima: ");
+                        int entradaGenero = int.Parse(Console.ReadLine());
+
+                        Console.Write("Digite o Título da Série: ");
+                        string entradaTitulo = Console.ReadLine();
+
+                        Console.Write("Digite o Ano de Início da Série: ");
+                        int entradaAno = int.Parse(Console.ReadLine());
+
+                        Console.Write("Digite a Descrição de Série: ");
+                        string entradaDescricao = Console.ReadLine();
+
+                        SerieServico.InserirSerie(entradaGenero, entradaTitulo, entradaAno, entradaDescricao);
+                        Console.WriteLine();
+                        SerieServico.ExibirMensagemAviso("Série adicionada com sucesso.");
+                        SerieServico.ExibirMensagemEncerramento();
                         break;
 
                     case "3":
@@ -38,6 +59,7 @@ namespace DIO.Series
                         Console.WriteLine();
 
                         SerieServico.VisualizarSerie(indiceSerie);
+                        SerieServico.ExibirMensagemEncerramento();
                         break;
 
                     case "C":

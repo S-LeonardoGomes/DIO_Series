@@ -65,40 +65,11 @@ namespace DIO.Series.Servicos
             ExibirMensagemEncerramento();
         }
 
-        public static void InserirSerie()
+        public static void InserirSerie(int genero, string titulo, int ano, string descricao)
         {
-            ExibirMensagemAviso("Inserir nova série:");
-            Console.WriteLine();
-
-            foreach (int i in Enum.GetValues(typeof(Genero)))
-            {
-                Console.WriteLine($"{i} - {Enum.GetName(typeof(Genero), i)}");
-            }
-
-            Console.WriteLine();
-            Console.Write("Digite o gênero entre as opções acima: ");
-            int entradaGenero = int.Parse(Console.ReadLine());
-
-            Console.Write("Digite o Título da Série: ");
-            string entradaTitulo = Console.ReadLine();
-
-            Console.Write("Digite o Ano de Início da Série: ");
-            int entradaAno = int.Parse(Console.ReadLine());
-
-            Console.Write("Digite a Descrição de Série: ");
-            string entradaDescricao = Console.ReadLine();
-
-            Serie novaSerie = new Serie(id: repositorio.ProximoId(),
-                                        genero: (Genero)entradaGenero,
-                                        titulo: entradaTitulo,
-                                        ano: entradaAno,
-                                        descricao: entradaDescricao);
-
+            Serie novaSerie = new Serie(repositorio.ProximoId(), (Genero)genero, titulo, descricao, ano);
+            
             repositorio.Insere(novaSerie);
-
-            Console.WriteLine();
-            ExibirMensagemAviso("Série adicionada com sucesso.");
-            ExibirMensagemEncerramento();
         }
 
         public static void ListarSeries()
@@ -128,6 +99,7 @@ namespace DIO.Series.Servicos
         public static void VisualizarSerie(int indiceSerie)
         {
             Serie serie = repositorio.RetornaPorId(indiceSerie);
+
             if(serie == null)
             {
                 ExibirMensagemAviso("Série não encontrada.");
@@ -136,7 +108,6 @@ namespace DIO.Series.Servicos
             }
 
             Console.WriteLine(serie);
-            ExibirMensagemEncerramento();
         }
 
         public static void ExibirMensagemAviso(string mensagem)
@@ -151,6 +122,14 @@ namespace DIO.Series.Servicos
             Console.Write($"{Environment.NewLine}Pressione qualquer tecla para retornar ao menu inicial...");
             Console.ReadKey();
             Console.Clear();
+        }
+
+        public static void ExibirGeneros()
+        {
+            foreach (int i in Enum.GetValues(typeof(Genero)))
+            {
+                Console.WriteLine($"{i} - {Enum.GetName(typeof(Genero), i)}");
+            }
         }
     }
 }
