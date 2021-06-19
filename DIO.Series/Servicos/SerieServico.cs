@@ -73,17 +73,13 @@ namespace DIO.Series.Servicos
 
         public static void ListarSeries()
         {
-            var lista = SerieServico.repositorio.Lista();
+            List<Serie> lista = SerieServico.repositorio.Lista();
 
             if (lista.Count == 0)
             {
-                Console.Clear();
                 ExibirMensagemAviso("Nenhuma série cadastrada.");
                 return;
             }
-
-            ExibirMensagemAviso("Lista de séries:");
-            Console.WriteLine();
 
             foreach (Serie serie in lista)
             {
@@ -92,7 +88,6 @@ namespace DIO.Series.Servicos
             }
 
             Console.WriteLine($"{Environment.NewLine}********************************************");
-            ExibirMensagemEncerramento();
         }
 
         public static void VisualizarSerie(int indiceSerie)

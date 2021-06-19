@@ -15,7 +15,10 @@ namespace DIO.Series
                 switch (opcaoUsuario)
                 {
                     case "1":
+                        SerieServico.ExibirMensagemAviso("Lista de séries:");
+                        Console.WriteLine();
                         SerieServico.ListarSeries();
+                        SerieServico.ExibirMensagemEncerramento();
                         break;
 
                     case "2":
