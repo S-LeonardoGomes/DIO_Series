@@ -154,7 +154,7 @@ UpgradeLog*.htm
  
 # svn
 .svn
-
+.vs
 # CVS - Source Control
 **/CVS/
 
